@@ -34,6 +34,20 @@ int get_rt_task_param(pid_t pid, struct rt_task *param)
 	return litmus_syscall(LRT_get_rt_task_param, (unsigned long) &args);
 }
 
+int set_current_deadline(lt_t new_deadline)
+{
+	union litmus_syscall_args args;
+	args.set_current_deadline.deadline = new_deadline;
+	return litmus_syscall(LRT_set_current_deadline, (unsigned long) &args);
+}
+
+int get_current_deadline(lt_t *deadline)
+{
+	union litmus_syscall_args args;
+	args.get_current_deadline.deadline = deadline;
+	return litmus_syscall(LRT_get_current_deadline, (unsigned long) &args);
+}
+
 int reservation_create(int rtype, void *config)
 {
 	union litmus_syscall_args args;
